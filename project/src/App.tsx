@@ -1,14 +1,10 @@
 import {
   Award,
-  BookOpen,
-  Briefcase,
   Building2,
   Calendar,
-  Globe,
   Image as ImageIcon,
   Lightbulb,
   Link,
-  PenTool,
   Play,
   Star,
   Target,
@@ -19,13 +15,6 @@ import {
 import React, { useState } from 'react';
 
 // Type Definitions
-interface AgendaCardProps {
-  icon: React.ReactNode;
-  title: string;
-  date: string;
-  description: string;
-}
-
 interface TimelineItemProps {
   icon: React.ReactNode;
   title: string;
@@ -67,20 +56,7 @@ interface DriveLinkProps {
   count: string;
   description: string;
 }
-
 // Component Definitions
-function AgendaCard({ icon, title, date, description }: AgendaCardProps) {
-  return (
-    <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition-colors">
-      <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-900/50 text-indigo-400 rounded-lg mb-4">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
-      <p className="text-indigo-400 text-sm mb-3">{date}</p>
-      <p className="text-gray-400">{description}</p>
-    </div>
-  );
-}
 
 function TimelineItem({ icon, title, date, content, side }: TimelineItemProps) {
   return (
@@ -206,87 +182,87 @@ const App = () => {
   // Team Data
   const coreTeam = [
     {
-      name: "Likhith",
-      role: "E-Cell President",
-      story: "Leading IgniteX has been transformative. From organizing our first workshop to representing VIT at IIT Bombay, every challenge has shaped our vision for student entrepreneurship."
+      name: "Suhas",
+      role: "Campus Ambassador",
+      story: "Leading IgniteX has been transformative. From organizing our first workshop to representing Oxford at IIT Bombay, every challenge has shaped our vision for student entrepreneurship."
     },
     {
-      name: "Rahul Verma",
-      role: "Technical Lead",
+      name: "Imthiyaz",
+      role: "Secretary",
       story: "Building our startup incubation program from scratch taught me invaluable lessons in leadership. Seeing our mentored startups succeed makes it all worthwhile."
     },
     {
-      name: "Aisha Patel",
-      role: "Events Director",
-      story: "Growing from small workshops to managing events with 1000+ attendees has been incredible. The energy and innovation of student entrepreneurs inspire me daily."
+      name: "Kavya",
+      role: "Secretary",
+      story: "Growing from small workshops to managing events with 300+ attendees has been incredible. The energy and innovation of student entrepreneurs inspire me daily."
     }
   ];
 
   const extendedTeam = [
     {
-      name: "Arjun Kumar",
-      role: "Marketing Head",
-      story: "Crafting our brand identity and reaching thousands of students has been rewarding."
+      name: "Likhith",
+      role: "Creative Head",
+      story: "Crafting our brand identity and reaching hundreds of students has been rewarding."
     },
     {
-      name: "Zara Sheikh",
-      role: "Operations Manager",
-      story: "Streamlining processes and building efficient systems for our growing community."
+      name: "Adhiti",
+      role: "Creative Head",
+      story: "Designing impactful visual content and streamlining creative processes to enhance community engagement."
     },
     {
-      name: "Dev Patel",
-      role: "Startup Relations",
-      story: "Connecting startups with mentors and resources to help them thrive."
+      name: "Faizan Khan",
+      role: "Event Coordinator",
+      story: " Organizing and managing events that connect students with resources and opportunities to help them grow."
     },
     {
-      name: "Maya Singh",
-      role: "Content Strategist",
-      story: "Creating engaging content that educates and inspires young entrepreneurs."
+      name: "Pranjali",
+      role: "Innovation and Research Head",
+      story: " Leading research initiatives and crafting engaging content to educate and inspire young entrepreneurs."
     },
     {
-      name: "Rohan Mehta",
-      role: "Finance Lead",
-      story: "Managing budgets and ensuring sustainable growth of our initiatives."
+      name: "Danish",
+      role: "Student Coordinator",
+      story: "Overseeing financial planning and ensuring sustainable growth for student-led initiatives."
     },
     {
-      name: "Neha Gupta",
-      role: "Community Manager",
-      story: "Building a vibrant ecosystem of student entrepreneurs and mentors."
+      name: "Kirthi",
+      role: "Innovation and Research Head",
+      story: "Developing innovative programs and fostering a culture of entrepreneurship within the student community."
     },
     {
-      name: "Kabir Shah",
-      role: "Innovation Lead",
+      name: "Ravannan",
+      role: "Student Coordinator",
       story: "Driving new initiatives and experimental programs for entrepreneurs."
     },
     {
-      name: "Ananya Reddy",
-      role: "Outreach Coordinator",
+      name: "Pooja",
+      role: "Student Coordinator",
       story: "Expanding our network and building valuable partnerships."
     },
     {
-      name: "Vikram Malhotra",
-      role: "Workshop Coordinator",
-      story: "Organizing hands-on learning experiences for aspiring entrepreneurs."
+      name: "Dnyan",
+      role: "Innovation and Research Head",
+      story: "Organizing hands-on learning experiences, workshops, and research-driven activities for aspiring entrepreneurs."
     },
     {
-      name: "Riya Kapoor",
-      role: "Design Lead",
-      story: "Creating visual experiences that reflect our innovative spirit."
+      name: "Nidhi",
+      role: "Innovation and Research Head",
+      story: "Creating compelling visual and research-based content that embodies our innovative vision."
     },
     {
-      name: "Aditya Nair",
-      role: "Technical Coordinator",
-      story: "Supporting tech initiatives and startup technical development."
+      name: "Sunil",
+      role: "Event Coordinator",
+      story: "Coordinating tech-driven events and fostering startup development initiatives."
     },
     {
-      name: "Sana Qureshi",
-      role: "PR Manager",
-      story: "Managing external communications and media relations."
+      name: "Chandana",
+      role: "Innovation and Research Head",
+      story: " Managing external communications, media relations, and branding strategies for innovation initiatives."
     },
     {
-      name: "Karthik Iyer",
-      role: "Research Lead",
-      story: "Analyzing trends and opportunities in student entrepreneurship."
+      name: "Tarun",
+      role: "Event Coordinator",
+      story: "Identifying emerging trends in entrepreneurship and planning insightful events that empower students."
     },
   ];
 
@@ -347,42 +323,6 @@ const App = () => {
   </div>
 </div>
 
-
-      {/* Current Semester Agenda */}
-      <section className="py-20 bg-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-white">Even Semester 2024 Agenda</h2>
-            <p className="text-xl text-gray-300">Transforming ideas into impact this semester</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <AgendaCard
-              icon={<BookOpen className="w-6 h-6" />}
-              title="Startup Bootcamp"
-              date="February 15-28, 2024"
-              description="Two-week intensive program covering ideation, business modeling, and pitch preparation with industry mentors"
-            />
-            <AgendaCard
-              icon={<Globe className="w-6 h-6" />}
-              title="Global Founders Meet"
-              date="March 10-12, 2024"
-              description="Virtual conference featuring successful entrepreneurs from Silicon Valley, Europe, and Asia"
-            />
-            <AgendaCard
-              icon={<PenTool className="w-6 h-6" />}
-              title="Innovation Challenge"
-              date="April 5-20, 2024"
-              description="Collaborate with industry partners to solve real-world problems through technological innovation"
-            />
-            <AgendaCard
-              icon={<Briefcase className="w-6 h-6" />}
-              title="Venture Capital Day"
-              date="May 15, 2024"
-              description="Exclusive pitching opportunity with leading VCs and angel investors from across India"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Event Gallery */}
       <section className="py-20 bg-gray-800/95">
@@ -530,7 +470,6 @@ const App = () => {
 
           {/* Extended Team Horizontal Scroll */}
           <div className="mt-12">
-            <h3 className="text-2xl font-bold text-center mb-8 text-white"></h3>
             <div className="overflow-x-auto">
               <div className="flex gap-6 pb-6 min-w-max px-4">
                 {extendedTeam.map((member, index) => (
@@ -585,7 +524,7 @@ const App = () => {
           </div>
           <p className="mb-4">The Oxford College of Engineering</p>
           <p className="mb-8">Fostering Innovation & Entrepreneurship</p>
-          <p>© 2024 IgniteX - Oxford E-Cell. All rights reserved.</p>
+          <p> IgniteX - Oxford E-Cell. All rights reserved.</p>
         </div>
       </footer>
     </div>
