@@ -82,6 +82,7 @@ function AchievementCard({ icon, title, stats, description }: AchievementCardPro
       <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-900/50 text-indigo-400 rounded-full mb-6">
         {icon}
       </div>
+      
       <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
       <p className="text-4xl font-bold text-indigo-400 mb-4">{stats}</p>
       <p className="text-gray-400">{description}</p>
@@ -92,7 +93,7 @@ function AchievementCard({ icon, title, stats, description }: AchievementCardPro
 function TeamMemberCard({ image, name, role, story }: TeamMemberCardProps) {
   return (
     <div className="bg-gray-900/50 rounded-xl border border-gray-700 overflow-hidden hover:border-indigo-500 transition-colors">
-      <img src={image} alt={name} className="w-full h-64 object-cover" />
+      <img src={image} alt={name} className="w-full h-48 object-cover" />
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2 text-white">{name}</h3>
         <p className="text-indigo-400 font-semibold mb-4">{role}</p>
@@ -177,21 +178,45 @@ function DriveLink({ title, link, count, description }: DriveLinkProps) {
   );
 }
 
+const members = [
+  {
+    name: "Dr. H N Ramesh",
+    position: "Principal",
+    message: "Education is the key to unlocking the world, a passport to freedom.",
+    image: "https://via.placeholder.com/200", // Replace with actual image
+  },
+  {
+    name: "Dr. B K Manjunath",
+    position: "Faculty Advisor",
+    message: "Believe in your dreams and work hard to achieve them.",
+    image: "https://via.placeholder.com/200", // Replace with actual image
+  },
+  {
+    name: "Dr. E Saravanan",
+    position: "Head of Department, CSE",
+    message: "Innovation and persistence pave the way to success.",
+    image: "https://via.placeholder.com/200", // Replace with actual image
+  },
+];
+
 // Main App Component
 const App = () => {
   // Team Data
   const coreTeam = [
     {
+      image: "/api/placeholder/400/320",
       name: "Suhas",
       role: "Campus Ambassador",
       story: "Leading IgniteX has been transformative. From organizing our first workshop to representing Oxford at IIT Bombay, every challenge has shaped our vision for student entrepreneurship."
     },
     {
+      image:"/api/placeholder/400/320",
       name: "Imthiyaz",
       role: "Secretary",
       story: "Building our startup incubation program from scratch taught me invaluable lessons in leadership. Seeing our mentored startups succeed makes it all worthwhile."
     },
     {
+      image:"/api/placeholder/400/320",
       name: "Kavya",
       role: "Secretary",
       story: "Growing from small workshops to managing events with 300+ attendees has been incredible. The energy and innovation of student entrepreneurs inspire me daily."
@@ -200,66 +225,79 @@ const App = () => {
 
   const extendedTeam = [
     {
+      image: "/api/placeholder/400/320",
       name: "Likhith",
       role: "Creative Head",
       story: "Crafting our brand identity and reaching hundreds of students has been rewarding."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Adhiti",
       role: "Creative Head",
       story: "Designing impactful visual content and streamlining creative processes to enhance community engagement."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Faizan Khan",
       role: "Event Coordinator",
       story: " Organizing and managing events that connect students with resources and opportunities to help them grow."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Pranjali",
       role: "Innovation and Research Head",
       story: " Leading research initiatives and crafting engaging content to educate and inspire young entrepreneurs."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Danish",
       role: "Student Coordinator",
       story: "Overseeing financial planning and ensuring sustainable growth for student-led initiatives."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Kirthi",
       role: "Innovation and Research Head",
       story: "Developing innovative programs and fostering a culture of entrepreneurship within the student community."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Ravannan",
       role: "Student Coordinator",
       story: "Driving new initiatives and experimental programs for entrepreneurs."
     },
     {
+      image: "/public/pooja.jpg",
       name: "Pooja",
       role: "Student Coordinator",
       story: "Expanding our network and building valuable partnerships."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Dnyan",
       role: "Innovation and Research Head",
       story: "Organizing hands-on learning experiences, workshops, and research-driven activities for aspiring entrepreneurs."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Nidhi",
       role: "Innovation and Research Head",
       story: "Creating compelling visual and research-based content that embodies our innovative vision."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Sunil",
       role: "Event Coordinator",
       story: "Coordinating tech-driven events and fostering startup development initiatives."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Chandana",
       role: "Innovation and Research Head",
       story: " Managing external communications, media relations, and branding strategies for innovation initiatives."
     },
     {
+      image: "/api/placeholder/400/320",
       name: "Tarun",
       role: "Event Coordinator",
       story: "Identifying emerging trends in entrepreneurship and planning insightful events that empower students."
@@ -309,7 +347,7 @@ const App = () => {
       {/* IgniteX Branding */}
       <div className="flex items-center justify-center mb-6">
         <Zap className="w-16 h-16 mr-4 text-indigo-500" />
-        <h1 className="text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">
+        <h1 className="text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500 pb-4">
           IgniteX
         </h1>
       </div>
@@ -323,26 +361,57 @@ const App = () => {
   </div>
 </div>
 
+<section className="bg-gray-900 text-white py-12 px-6 md:px-20">
+      <h2 className="text-4xl font-bold text-center mb-10 text-indigo-400">
+        Our Leadership 
+      </h2>
+
+      <div className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-8">
+        {members.map((member, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center bg-gray-800 p-6 rounded-2xl shadow-lg w-full md:w-1/3 hover:scale-105 transition-transform duration-300"
+          >
+            {/* Member Image */}
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-40 h-40 rounded-full object-cover border-4 border-indigo-500 mb-4"
+            />
+
+            {/* Member Details */}
+            <h3 className="text-2xl font-semibold text-indigo-300">
+              {member.name}
+            </h3>
+            <p className="text-lg text-gray-400">{member.position}</p>
+            <p className="mt-4 text-gray-300 italic text-center">
+              "{member.message}"
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
 
       {/* Event Gallery */}
       <section className="py-20 bg-gray-800/95">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-16 text-white">Event Highlights</h2>
+          <h2 className="text-3xl font-bold text-center mb-16 text-white">Events Highlights</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <EventPhoto
               image="/api/placeholder/2000/1000"
-              title="Startup Bootcamp 2023"
-              description="Over 200 participants learned from 20+ industry experts"
+              title="Competitions"
+              description="Over 150 participants registered to our various competitions"
             />
             <EventPhoto
               image="/api/placeholder/2000/1000"
-              title="Innovation Summit"
-              description="Featured keynotes from founders of 5 unicorn startups"
+              title="Vicharagni"
+              description="22 startup ideas of various domains pitched at our flagship event "
             />
             <EventPhoto
               image="/api/placeholder/2000/1000"
-              title="Pitch Competition Finals"
-              description="₹10 Lakhs in equity-free funding distributed"
+              title="Workshops"
+              description="Hands-on learning experiences for budding entrepreneurs"
             />
           </div>
         </div>
@@ -361,7 +430,7 @@ const App = () => {
             />
             <VideoCard
               thumbnail="/api/placeholder/2000/1000"
-              title="Startup Success Stories 2023"
+              title="Startup Success Stories 2024"
               duration="4:15"
               description="Meet the student founders who raised their first funding"
             />
@@ -381,7 +450,7 @@ const App = () => {
                 <TimelineItem
                   icon={<Building2 className="w-6 h-6" />}
                   title="IgniteX Formation"
-                  date="January 2023"
+                  date="August 2024"
                   content="Started with 16 passionate students and 1 faculty mentor, focusing on building an entrepreneurial ecosystem"
                   side="left"
                 />
@@ -390,7 +459,7 @@ const App = () => {
                   icon={<Calendar className="w-6 h-6" />}
                   title="First Major Event"
                   date="October 2024"
-                  content="'Vicharagni' attracted 150+ participants, and resulted in 18 startup ideas"
+                  content="'Vicharagni' attracted 150+ participants, and resulted in 22 startup ideas"
                   side="right"
                 />
                 
@@ -442,9 +511,9 @@ const App = () => {
             />
             <AchievementCard
               icon={<Target className="w-8 h-8" />}
-              title="Success Rate"
-              stats="40%"
-              description="Of incubated startups secured external funding"
+              title="Mentorship "
+              stats="30%"
+              description="Increase of student participation in mentorship programs"
             />
           </div>
         </div>
@@ -460,7 +529,7 @@ const App = () => {
             {coreTeam.map((member, index) => (
               <TeamMemberCard
                 key={index}
-                image="/api/placeholder/400/320"
+                image={member.image}
                 name={member.name}
                 role={member.role}
                 story={member.story}
@@ -475,7 +544,7 @@ const App = () => {
                 {extendedTeam.map((member, index) => (
                   <div key={index} className="w-72 flex-shrink-0">
                     <TeamMemberCard
-                      image="/api/placeholder/400/320"
+                      image={member.image}
                       name={member.name}
                       role={member.role}
                       story={member.story}
@@ -494,22 +563,22 @@ const App = () => {
           <h2 className="text-3xl font-bold text-center mb-16 text-white">Event Gallery</h2>
           <div className="max-w-3xl mx-auto">
             <DriveLink
-              title="Startup Bootcamp 2023 Photos"
+              title="In-College Events "
               link="#"
-              count="156 photos"
-              description="Complete photo coverage of our two-week intensive program"
+              count="20 photos"
+              description="Complete photo coverage of our intensive program"
+            />
+            <DriveLink
+              title="Flagship Event Vicharagni"
+              link="#"
+              count="43 photos"
+              description="Highlights from our annual startup pitch event"
             />
             <DriveLink
               title="E-Summit 2023 Gallery"
               link="#"
-              count="243 photos"
+              count="118 photos"
               description="Memories from our biggest entrepreneurship summit"
-            />
-            <DriveLink
-              title="Innovation Challenge Photos"
-              link="#"
-              count="98 photos"
-              description="Capturing moments of creativity and collaboration"
             />
           </div>
         </div>
