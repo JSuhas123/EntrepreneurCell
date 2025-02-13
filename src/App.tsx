@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   Award,
   Building2,
@@ -12,7 +13,8 @@ import {
   Users,
   Zap
 } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 
 // Type Definitions
 interface TimelineItemProps {
@@ -55,7 +57,6 @@ interface DriveLinkProps {
   link: string;
   description: string;
 }
-
 
 // Component Definitions
 function TimelineItem({ icon, title, date, content, side }: TimelineItemProps) {
@@ -196,34 +197,34 @@ function DriveLink({ title, link, description }: DriveLinkProps) {
 
 // Data Definitions
 const members = [
-  /*{
-    name: "Dr. snvl Narasimha Raju",
+  {
+    name: "Dr. S N V L Narasimha Raju",
     position: "Chairman",
-    message: "Education is the key to unlocking the world, a passport to freedom.",
-    image: "/principal.jpg",
-  },*/
+    message: "The purpose of education is to create leaders who serve, inspire and bring change to the world.",
+    image: "/public/images/chair.jpg",
+  },
   {
     name: "Dr. H N Ramesh",
     position: "Principal",
-    message: "Education is the key to unlocking the world, a passport to freedom.",
+    message: "Learning is a journey where knowledge fuels progress and wisdom guides the way.",
     image: "/public/images/principal.jpg",
   },
   {
     name: "Dr. B K Manjunath",
     position: "Faculty Advisor",
-    message: "Believe in your dreams and work hard to achieve them.",
+    message: "Entrepreneurship is not a career, it's a mindset of solving problems and creating impact.",
     image: "/public/images/manjusir.jpg",
   },
   {
-    name: "Dr. E Saravanan",
+    name: "Dr. E Saravana Kumar",
     position: "Head of Department, CSE",
-    message: "Innovation and persistence pave the way to success.",
+    message: "An educated mind finds success; an educated heart finds purpose in serving others.",
     image: "/public/images/csehod.jpg",
   },
   {
     name: "Mrs Manjula L",
     position: "Assistant Professor, CSE",
-    message: "Innovation and persistence pave the way to success.",
+    message: "Knowledge gains true value when shared for the betterment of others.",
     image: "/public/images/manjuphoto.JPG",
   },
 ];
@@ -236,13 +237,13 @@ const coreTeam = [
     story: "Leading IgniteX has been transformative. From organizing our first workshop to representing Oxford at IIT Bombay."
   },
   {
-    image: "/public/images/imti.jpg",
+    image: "/public/images/imthi.jpg",
     name: "Imthiyaz",
     role: "Secretary",
     story: "Building our startup incubation program from scratch taught me invaluable lessons in leadership."
   },
   {
-    image: "/public/images/kavya.jpg",
+    image: "/public/images/kavyabs.jpg",
     name: "Kavya",
     role: "Secretary",
     story: "Growing from small workshops to managing events with 300+ attendees has been incredible."
@@ -251,19 +252,19 @@ const coreTeam = [
 
 const extendedTeam = [
   {
-    image: "/public/images/liki.jpg",
+    image: "/public/images/likhi.jpg",
     name: "Likhith",
     role: "Creative Head",
     story: "Crafting our brand identity and reaching hundreds of students."
   },
     {
-      image: "/public/images/aditi.jpg",
+      image: "/public/images/adit.jpg",
       name: "Adhiti",
       role: "Creative Head",
       story: "Designing impactful visual content and streamlining creative processes to enhance community engagement."
     },
     {
-      image: "/public/images/faizan.JPG",
+      image: "/public/images/Faiz.JPG",
       name: "Faizan Khan",
       role: "Event Coordinator",
       story: " Organizing and managing events that connect students with resources and opportunities to help them grow."
@@ -275,7 +276,7 @@ const extendedTeam = [
       story: " Leading research initiatives and crafting engaging content to educate and inspire young entrepreneurs."
     },
     {
-      image: "/public/images/danish.jpg",
+      image: "/public/images/dani.jpg",
       name: "Danish",
       role: "Student Coordinator",
       story: "Overseeing financial planning and ensuring sustainable growth for student-led initiatives."
@@ -323,90 +324,119 @@ const extendedTeam = [
       story: " Managing external communications, media relations, and branding strategies for innovation initiatives."
     },
     {
-      image: "/public/images/tarun.jpg",
+      image: "/public/images/taru.jpg",
       name: "Tarun",
       role: "Event Coordinator",
       story: "Identifying emerging trends in entrepreneurship and planning insightful events that empower students."
     },
   ];
-
+  const config = {
+    ecellName: "IgniteX",
+    tagline: "Empowering Tomorrow's Entrepreneurs Today.",
+    description:
+      "We provide students with the platform, mentorship, and resources to launch impactful startups.",
+    images: {
+      ecellLogo: "/images/ecell.jpg",
+      collegeLogo: "/images/clglogo.jpg",
+      heroBg: "/images/ecell.jpg",
+    },
+  };
   const App = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+  
+      useEffect(() => {
+        const handleScroll = () => {
+          setIsScrolled(window.scrollY > 30); // Shrink when scrolled 50px down
+        };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+  
     return (
       <div className="min-h-screen bg-gray-900 text-gray-100">
-        {/* Background Pattern */}
-        <div className="fixed inset-0 opacity-5 pointer-events-none">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30 30 0z' fill='%234F46E5' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-            backgroundSize: '60px 60px'
-          }} />
-        </div>
-  
-        {/* Hero Section */}
-        <div className="relative min-h-[500px] md:h-[700px]">
+         <header
+      className={`top-0 left-0 right-0 z-50 transition-all duration-300  ${
+        isScrolled ? "bg-gray-900/80 backdrop-blur-md shadow-md py-2" : "bg-transparent "
+      }`}
+    >
+      <div
+        className={`flex items-center justify-between transition-all duration-300 ease-in-out ${
+          isScrolled ? "p-2 md:p-4" : "p-2 md:p-3"
+        }`}
+      >
+        {/* College Logo */}
+        <img
+          src={config.images.collegeLogo}
+          alt="College Logo"
+          className={`transition-all duration-300 ${
+            isScrolled ? "h-10 md:h-14" : "h-14 md:h-20"
+          } w-auto`}
+          onError={(e) => (e.currentTarget.src = "/api/placeholder/200/200")}
+        />
+
+        {/* College Information */}
+        <h2
+          className={`text-center text-white font-bold transition-all duration-300 ${
+            isScrolled ? "text-sm md:text-lg px-1 md:px-2" : "text-lg md:text-xl px-2 md:px-4"
+          }`}
+        >
+          Children's Education Society ® <br />
+          THE OXFORD COLLEGE OF ENGINEERING <br />
+          Hosur Road, Bommanahalli, Bengaluru-560 068. <br />
+          Approved by AICTE, New Delhi | Accredited by NBA, NAAC | Affiliated to VTU, Belgaum
+        </h2>
+
+        {/* E-Cell Logo */}
+        <img
+          src={config.images.ecellLogo}
+          alt="E-Cell Logo"
+          className={`transition-all duration-300 ${
+            isScrolled ? "h-10 md:h-14" : "h-14 md:h-20"
+          } w-auto`}
+          onError={(e) => (e.currentTarget.src = "/api/placeholder/200/200")}
+        />
+      </div>
+    </header>
+        {/* Hero Section - IgniteX */}
+        <div id="hero" className="relative min-h-[500px] md:h-[700px] flex items-center justify-center">
           <img
-            src="/public/images/ecell.jpg"
+            src={config.images.heroBg}
             alt="E-Cell Hero"
-            className="w-full h-full object-cover opacity-20"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = "/api/placeholder/1200/700";
-            }}
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+            onError={(e) => (e.currentTarget.src = "/api/placeholder/1200/700")}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/80 to-gray-900" />
   
-          {/* Header Content */}
-          <div className="absolute top-0 left-0 right-0 flex flex-col md:flex-row items-center justify-between p-4 md:p-8">
-            <img 
-              src="/public/images/clglogo.jpg" 
-              alt="College Logo" 
-              className="h-16 md:h-28 w-auto mb-4 md:mb-0"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = "/api/placeholder/200/200";
-              }}
-            />
-            
-            <h2 className="text-xl md:text-xl font-bold text-white text-center px-2 md:px-4">
-              Children's Education Society ® <br />
-              THE OXFORD COLLEGE OF ENGINEERING <br />
-              Hosur Road, Bommanahalli, Bengaluru-560 068.<br />
-              Approved by AICTE, New Delhi | Accredited by NBA, NAAC | Affiliated to VTU, Belgaum
-            </h2>
-  
-            <img 
-              src="/public/images/ecell.jpg" 
-              alt="E-Cell Logo" 
-              className="h-16 md:h-28 w-auto mt-4 md:mt-0"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = "/api/placeholder/200/200";
-              }}
-            />
-          </div>
-  
           {/* Hero Content */}
-          <div className="absolute inset-0 flex items-center justify-center px-4">
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-4 md:mb-6">
-                <Zap className="w-10 h-10 md:w-16 md:h-16 mr-3 md:mr-4 text-indigo-500" />
-                <h1 className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500 pb-2 md:pb-4">
-                  IgniteX
-                </h1>
-              </div>
-              <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-4 text-gray-300 px-4">
-              Empowering Tomorrow's Entrepreneurs Today. We provide students with the
-              platform, mentorship, and resources to launch impactful startups.
-              </p>
+          <div className="flex items-center justify-center min-h-screen">
+          <motion.div
+            className="relative z-10 text-center"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="flex items-center justify-center mb-6 md:mb-10">
+              <Zap className="w-10 h-10 md:w-16 md:h-16 mr-3 md:mr-4 text-indigo-500" />
+              <h1 className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500 pb-2 md:pb-4">
+                {config.ecellName}
+              </h1>
             </div>
+            <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-4 text-gray-300 px-4">
+              {config.tagline}
+            </p>
+            <p className="text-lg max-w-2xl mx-auto mt-2 text-gray-400 px-4">
+              {config.description}
+            </p>
+          </motion.div>
           </div>
         </div>
-  
+
         {/* Leadership Section */}
         <section className="py-12 md:py-20 px-4 md:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-400">
             Our Leadership
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto">
             {members.map((member, index) => (
               <div key={index} className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300">
               <img
@@ -640,9 +670,6 @@ const extendedTeam = [
           <p className="mb-4 md:mb-8 text-sm md:text-base">
             Fostering Innovation & Entrepreneurship
           </p>
-          <p className="text-sm md:text-base">
-            © IgniteX - Oxford E-Cell. All rights reserved.
-          </p>
         </div>
       </footer>
     </div>
@@ -650,10 +677,3 @@ const extendedTeam = [
 };
 
 export default App;
-
-
-
-
-
-
- 
