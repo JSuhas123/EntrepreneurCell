@@ -11,6 +11,7 @@ import {
   Target,
   Trophy,
   Users,
+  // Users2,
   Zap
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
@@ -50,6 +51,7 @@ interface VideoCardProps {
   title: string;
   duration: string;
   description: string;
+  videoSrc: string;
 }
 
 interface DriveLinkProps {
@@ -135,8 +137,19 @@ function EventPhoto({ image, title, description }: EventPhotoProps) {
   );
 }
 
-function VideoCard({ thumbnail, title, duration, description }: VideoCardProps) {
+const VideoCard = ({ thumbnail, title, duration, description, videoSrc }: VideoCardProps) => {
   const [playing, setPlaying] = useState(false);
+
+  // Convert Google Drive link to embed format
+  const getDirectLink = (url: string) => {
+    // For Google Drive links
+    if (url.includes('drive.google.com')) {
+      const match = url.match(/[-\w]{25,}/);
+      return match ? `https://drive.google.com/file/d/${match[0]}/preview` : url;
+    }
+    // Return original URL if not a Google Drive link
+    return url;
+  };
 
   return (
     <div className="bg-gray-800 rounded-xl overflow-hidden">
@@ -156,13 +169,25 @@ function VideoCard({ thumbnail, title, duration, description }: VideoCardProps) 
               <Play className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
           </div>
-          <div className="absolute bottom-4 right-4 px-2 py-1 bg-black/70 rounded text-sm">
+          <div className="absolute bottom-4 right-4 px-2 py-1 bg-black/70 rounded text-sm text-white">
             {duration}
           </div>
         </div>
       ) : (
-        <div className="aspect-video bg-gray-900 flex items-center justify-center">
-          <p className="text-gray-400">Video player placeholder</p>
+        <div className="w-full h-48 md:h-64">
+          {videoSrc.includes('drive.google.com') ? (
+            <iframe 
+              src={getDirectLink(videoSrc)}
+              className="w-full h-full" 
+              allowFullScreen
+              allow="autoplay"
+            ></iframe>
+          ) : (
+            <video className="w-full h-full object-cover" controls autoPlay>
+              <source src={videoSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
         </div>
       )}
       <div className="p-4">
@@ -171,8 +196,7 @@ function VideoCard({ thumbnail, title, duration, description }: VideoCardProps) 
       </div>
     </div>
   );
-}
-
+};
 function DriveLink({ title, link, description }: DriveLinkProps) {
   return (
     <a
@@ -194,56 +218,84 @@ function DriveLink({ title, link, description }: DriveLinkProps) {
     </a>
   );
 }
-
 // Data Definitions
 const members = [
   {
     name: "Dr. S N V L Narasimha Raju",
     position: "Chairman",
     message: "The purpose of education is to create leaders who serve, inspire and bring change to the world.",
-    image: "/public/images/chair.jpg",
+    image: "/images/chair.jpg",
   },
   {
     name: "Dr. H N Ramesh",
     position: "Principal",
     message: "Learning is a journey where knowledge fuels progress and wisdom guides the way.",
-    image: "/public/images/principal.jpg",
+    image: "/images/principal.jpg",
   },
   {
     name: "Dr. B K Manjunath",
     position: "Faculty Advisor",
     message: "Entrepreneurship is not a career, it's a mindset of solving problems and creating impact.",
-    image: "/public/images/manjusir.jpg",
+    image: "/images/manjusir.jpg",
   },
   {
     name: "Dr. E Saravana Kumar",
     position: "Head of Department, CSE",
     message: "An educated mind finds success; an educated heart finds purpose in serving others.",
-    image: "/public/images/csehod.jpg",
+    image: "/images/csehod.jpg",
   },
   {
     name: "Mrs Manjula L",
     position: "Assistant Professor, CSE",
     message: "Knowledge gains true value when shared for the betterment of others.",
-    image: "/public/images/manjuphoto.JPG",
+    image: "/images/manjuphoto.JPG",
   },
+];
+
+const coreStory = [
+  {
+    image: "/images/pooja.jpg",
+      name: "Pooja",
+      role: "Student Coordinator",
+      story:"Stepping onto the grand stage of IIT Bombay was surreal. From the moment we arrived, I knew this was more than just an event—it was a gateway to endless possibilities. As a Student Coordinator, my role was to expand our network, meet like-minded innovators, and forge valuable partnerships. The energy in the room was electrifying, with students and industry leaders exchanging ideas that could shape the future. I felt a sense of pride, not just for myself but for our entire IgniteX family, knowing that we were putting our college on the national map. This experience gave me the confidence to dream bigger and push boundaries in ways I never imagined."
+  },
+  {
+    image: "/images/imthi.jpg",
+    name: "Imthiyaz",
+    role: "Secretary",
+    story: "Building our startup incubation program from scratch was already an incredible challenge, but presenting it at IIT Bombay? That was a whole new level. I remember standing in front of an audience of investors, founders, and students, my heart pounding as I spoke about the vision of IgniteX. Every lesson I had learned about leadership, resilience, and adaptability came into play. The feedback, the connections, and the sheer thrill of representing our college at such a prestigious platform made all the late nights worth it. More than anything, I walked away with a deeper understanding of what it takes to turn ideas into reality."
+
+
+  },
+  {
+    image: "/images/nidgi.jpg",
+    name: "Nidhi",
+    role: "Innovation and Research Head",
+    story: "For me, IgniteX has always been about more than just startups—it’s about telling a story that inspires others to innovate. At IIT Bombay, I had the opportunity to showcase our research-driven approach and present visual content that embodied our vision. Seeing our work displayed among some of the best entrepreneurial minds in the country was exhilarating. It wasn’t just about competing; it was about contributing to a larger movement. I left with a renewed sense of purpose, knowing that the impact of our work extended beyond our campus and into the future of entrepreneurship."
+  },
+  {
+    image: "/images/likhi.jpg",
+    name: "Likhith",
+    role: "Creative Head",
+    story: "Crafting a brand identity for IgniteX wasn’t just about making things look good—it was about creating an emotional connection. Standing in IIT Bombay, surrounded by hundreds of ambitious students, I realized the power of our messaging. Every banner, every presentation, every piece of content we had created told a story—a story of passion, perseverance, and the relentless pursuit of innovation. Watching students resonate with our ideas, ask questions, and engage with our journey filled me with an overwhelming sense of accomplishment. This was more than a competition; it was a stage where creativity met entrepreneurship, and I was proud to be part of it."
+  }
 ];
 
 const coreTeam = [
   {
-    image: "/public/images/suhas.jpg",
+    image: "/images/suhas.jpg",
     name: "Suhas",
     role: "Campus Ambassador",
     story: "Leading IgniteX has been transformative. From organizing our first workshop to representing Oxford at IIT Bombay."
   },
   {
-    image: "/public/images/imthi.jpg",
+    image: "/images/imthi.jpg",
     name: "Imthiyaz",
     role: "Secretary",
     story: "Building our startup incubation program from scratch taught me invaluable lessons in leadership."
   },
   {
-    image: "/public/images/kavyabs.jpg",
+    image: "/images/kavyabs.jpg",
     name: "Kavya",
     role: "Secretary",
     story: "Growing from small workshops to managing events with 300+ attendees has been incredible."
@@ -252,79 +304,79 @@ const coreTeam = [
 
 const extendedTeam = [
   {
-    image: "/public/images/likhi.jpg",
+    image: "/images/likhi.jpg",
     name: "Likhith",
     role: "Creative Head",
     story: "Crafting our brand identity and reaching hundreds of students."
   },
     {
-      image: "/public/images/adit.jpg",
+      image: "/images/adit.jpg",
       name: "Adhiti",
       role: "Creative Head",
       story: "Designing impactful visual content and streamlining creative processes to enhance community engagement."
     },
     {
-      image: "/public/images/Faiz.JPG",
+      image: "/images/Faiz.jpg",
       name: "Faizan Khan",
       role: "Event Coordinator",
       story: " Organizing and managing events that connect students with resources and opportunities to help them grow."
     },
     {
-      image: "/public/images/pranjali.jpg",
+      image: "/images/pranjali.jpg",
       name: "Pranjali",
       role: "Innovation and Research Head",
       story: " Leading research initiatives and crafting engaging content to educate and inspire young entrepreneurs."
     },
     {
-      image: "/public/images/dani.jpg",
+      image: "/images/dani.jpg",
       name: "Danish",
       role: "Student Coordinator",
       story: "Overseeing financial planning and ensuring sustainable growth for student-led initiatives."
     },
     {
-      image: "/public/images/kirthi.jpg",
+      image: "/images/kirthii.jpg",
       name: "Kirthi",
       role: "Innovation and Research Head",
       story: "Developing innovative programs and fostering a culture of entrepreneurship within the student community."
     },
     {
-      image: "/api/placeholder/400/320",
+      image: "/images/ravanan.jpg",
       name: "Ravannan",
       role: "Student Coordinator",
       story: "Driving new initiatives and experimental programs for entrepreneurs."
     },
     {
-      image: "/public/images/pooja.jpg",
+      image: "/images/pooja.jpg",
       name: "Pooja",
       role: "Student Coordinator",
       story: "Expanding our network and building valuable partnerships."
     },
     {
-      image: "/public/images/SATISH.jpg",
+      image: "/images/dnyan.jpg",
       name: "Dnyan",
       role: "Innovation and Research Head",
       story: "Organizing hands-on learning experiences, workshops, and research-driven activities for aspiring entrepreneurs."
     },
     {
-      image: "/public/images/nidgi.jpg",
+      image: "/images/nidgi.jpg",
       name: "Nidhi",
       role: "Innovation and Research Head",
       story: "Creating compelling visual and research-based content that embodies our innovative vision."
     },
     {
-      image: "/public/images/sunil.png",
+      image: "/images/sunil.png",
       name: "Sunil",
       role: "Event Coordinator",
       story: "Coordinating tech-driven events and fostering startup development initiatives."
     },
     {
-      image: "/public/images/chandana.jpg",
+      image: "/images/chandana.jpg",
       name: "Chandana",
       role: "Innovation and Research Head",
       story: " Managing external communications, media relations, and branding strategies for innovation initiatives."
     },
     {
-      image: "/public/images/taru.jpg",
+      image: "/images/taru.jpg",
       name: "Tarun",
       role: "Event Coordinator",
       story: "Identifying emerging trends in entrepreneurship and planning insightful events that empower students."
@@ -343,7 +395,15 @@ const extendedTeam = [
   };
   const App = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-  
+    const [currentIndex, setCurrentIndex] = useState(0);
+   // const [visitorCount, setVisitorCount] = useState(0);
+
+
+    const handleNext = () => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex + 1 < coreStory.length ? prevIndex + 1 : 0
+      );
+    };
       useEffect(() => {
         const handleScroll = () => {
           setIsScrolled(window.scrollY > 30); // Shrink when scrolled 50px down
@@ -351,9 +411,31 @@ const extendedTeam = [
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+   /* useEffect(() => {
+      // Get the current count from localStorage
+      const storedCount = localStorage.getItem('visitorCount');
+      const currentCount = storedCount ? parseInt(storedCount, 10) : 0;
+  
+      // Increment count on every page load
+      const newCount = currentCount + 1;
+      localStorage.setItem('visitorCount', newCount.toString());
+      setVisitorCount(newCount);
+    }, []);*/
   
     return (
       <div className="min-h-screen bg-gray-900 text-gray-100">
+          {/* Visitor Counter }
+      <div className="fixed bottom-4 left-4 z-50 bg-indigo-600 rounded-lg shadow-lg">
+        <div className="flex items-center px-4 py-2 space-x-2">
+          <Users2 className="w-5 h-5 text-white" />
+          <div className="text-white font-medium">
+            <span className="text-lg">{visitorCount.toLocaleString()}</span>
+            <span className="text-sm ml-2">visitors</span>
+          </div>
+        </div>
+      </div>*/}
+
          <header
       className={`top-0 left-0 right-0 z-50 transition-all duration-300  ${
         isScrolled ? "bg-gray-900/80 backdrop-blur-md shadow-md py-2" : "bg-transparent "
@@ -470,17 +552,17 @@ const extendedTeam = [
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             <EventPhoto
-              image="/public/images/competition.jpg"
+              image="/images/competition.jpg"
               title="Competitions"
               description="Over 150 participants registered to our various competitions"
             />
             <EventPhoto
-              image="/public/images/vichar.jpg"
+              image="/images/vichar.jpg"
               title="Vicharagni"
               description="22 startup ideas of various domains pitched at our flagship event"
             />
             <EventPhoto
-              image="/public/images/workshops.jpg"
+              image="/images/workshops.jpg"
               title="Workshops"
               description="Hands-on learning experiences for budding entrepreneurs"
             />
@@ -495,17 +577,19 @@ const extendedTeam = [
             Featured Videos
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
-            <VideoCard
-              thumbnail="/api/placeholder/2000/1000"
-              title="IgniteX Journey: From Campus to National Stage"
-              duration="5:24"
-              description="Our journey from a small campus club to winning at IIT Bombay E-Summit"
-            />
-            <VideoCard
-              thumbnail="/api/placeholder/2000/1000"
+          <VideoCard
+            thumbnail="/images/video1.jpg"
+            title="IgniteX Journey: From Campus to National Stage"
+            duration="2:28"
+            description="Our journey from a small campus club to winning at IIT Bombay E-Summit"
+            videoSrc="https://drive.google.com/file/d/1YOYXxvB2pwuNAAjB394pA7bmXoBHu_3G/view?usp=drivesdk"
+          />
+          <VideoCard
+              thumbnail="/images/video2.jpg"
               title="Startup Success Stories 2024"
-              duration="4:15"
-              description="Meet the student founders who raised their first funding"
+              duration="2:20"
+              description="Meet the student founders who raised their ideas"
+              videoSrc="https://drive.google.com/file/d/1DwuUaEIe9cCbfVfZlXYTaX8udaHvUfpG/view?usp=drive_link"
             />
           </div>
         </div>
@@ -630,6 +714,51 @@ const extendedTeam = [
           </div>
         </div>
       </section>
+      
+      <section className="relative w-full flex flex-col justify-center items-center bg-gray-900 py-12 px-6">
+  {/* Section Title */}
+  <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 text-white">
+  Our Stories
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 items-center max-w-6xl mx-auto gap-12">
+    {/* Left - Big Image */}
+    <div className="flex justify-center">
+      <img
+        src={coreStory[currentIndex].image}
+        alt={coreStory[currentIndex].name}
+        className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
+      />
+    </div>
+
+    {/* Right - Story */}
+    <div className="text-center md:text-left">
+      <h2 className="text-3xl md:text-4xl font-bold text-indigo-400">
+        {coreStory[currentIndex].name}
+      </h2>
+      <p className="mt-4 text-lg text-gray-300">{coreStory[currentIndex].story}</p>
+    </div>
+  </div>
+
+  {/* Navigation arrow - right center */}
+  <button
+  onClick={handleNext}
+  className="absolute right-2 md:right-8 top-1/2 transform -translate-y-1/2 
+    bg-indigo-600 p-3 md:p-2 rounded-full opacity-80 hover:opacity-100 transition 
+    focus:ring-2 focus:ring-indigo-400 active:scale-95 w-12 h-12 flex items-center justify-center"
+  aria-label="Next story"
+>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    className="h-6 w-6 text-white md:h-6 md:w-6" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke="currentColor"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+  </svg>
+</button>
+</section>
 
       {/* Photo Archive Section */}
       <section className="py-16 md:py-20 bg-indigo-900/40">
@@ -638,11 +767,6 @@ const extendedTeam = [
             Event Gallery
           </h2>
           <div className="max-w-3xl mx-auto">
-            <DriveLink
-              title="In-College Events"
-              link="#"
-              description="Complete photo coverage of our intensive program"
-            />
             <DriveLink
               title="Flagship Event Vicharagni"
               link="https://drive.google.com/drive/folders/1Dm90K92v6OoTHP2WeZZl27NX-uVODpv_"
